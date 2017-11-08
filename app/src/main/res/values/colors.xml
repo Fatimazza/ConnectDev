@@ -6,6 +6,13 @@
     <color name="gray_0">#93a8ac</color>
     <color name="gray_1">#e7e4e4</color>
 
+    <color name="transparent">#00000000</color>
+    <color name="transparent_blue">#803023ae</color>
+    <color name="transparent_pink">#80c96dd8</color>
+
+    <color name="blue_0">#3023ae</color>
+    <color name="pink_0">#c96dd8</color>
+    <color name="pink_1">#af61d0</color>
     <color name="green_0">#5eff00</color>
 
     <color name="colorPrimary">@color/white_0</color>
@@ -17,5 +24,7 @@
     <color name="separator">@color/gray_1</color>
     
     <color name="onlineIndicator">@color/green_0</color>
+    <color name="profilePink">@color/pink_0</color>
+    <color name="profileBlue">@color/blue_0</color>
 
 </resources>
