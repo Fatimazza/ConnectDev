@@ -6,6 +6,8 @@
     <color name="gray_0">#93a8ac</color>
     <color name="gray_1">#e7e4e4</color>
 
+    <color name="green_0">#5eff00</color>
+
     <color name="colorPrimary">@color/white_0</color>
     <color name="colorPrimaryDark">@color/white_0</color>
     <color name="colorAccent">#FF4081</color>
@@ -14,6 +16,6 @@
     <color name="bottomBarText">@color/gray_0</color>
     <color name="separator">@color/gray_1</color>
     
-    <color name="greenOnlineIndicator">#5eff00</color>
+    <color name="onlineIndicator">@color/green_0</color>
 
 </resources>

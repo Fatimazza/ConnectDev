@@ -1,44 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <include
-        android:id="@+id/rl_profpic"
-        layout="@layout/layout_profile_picture"/>
+        android:id="@+id/rl_profile_header"
+        layout="@layout/layout_profile_header"/>
 
-    <id.co.binar.connectdev.components.textview.MontserratRegular
-        android:id="@+id/tv_distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="500 m"
-        android:layout_marginTop="7dp"
-        android:textColor="#898f9b"
-        android:textSize="12sp" />
-
-    <id.co.binar.connectdev.components.textview.MontserratRegular
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_profpic"
+    <Button
+        android:id="@+id/btn_friends"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/rl_profile_header"
         android:layout_centerHorizontal="true"
-        android:text="Full name"
         android:layout_marginTop="7dp"
-        android:textColor="#444444"
-        android:textSize="24sp" />
-
-    <id.co.binar.connectdev.components.textview.MontserratRegular
-        android:id="@+id/tv_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_name"
-        android:layout_centerHorizontal="true"
-        android:text="User's Skill"
-        android:textColor="#898f9b"
-        android:textSize="14sp" />
+        android:layout_marginBottom="7dp"
+        android:text="@string/profile_friends"
+        android:textStyle="bold"
+        android:textColor="@color/onlineIndicator"
+        android:background="@color/gray_0" />
 
 </RelativeLayout>
+
