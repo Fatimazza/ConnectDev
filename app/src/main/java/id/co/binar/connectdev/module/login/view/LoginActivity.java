@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.module.login.presenter.LoginPresenter;
+import id.co.binar.connectdev.module.main.view.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -44,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
     private OnLoginView loginView = new OnLoginView() {
         @Override
         public void onLoginSuccess() {
-            // TODO: 11/8/17 Show Main Features
-            Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
         }
 
         @Override
