@@ -6,6 +6,12 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-
+    <id.co.binar.connectdev.module.util.CircleImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/button_facebook" />
 
 </RelativeLayout>
