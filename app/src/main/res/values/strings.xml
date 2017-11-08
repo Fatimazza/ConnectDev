@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">ConnectDev</string>
+
+    <!-- Facebook Application ID -->
+    <string name="facebook_app_id">278978302613421</string>
 </resources>

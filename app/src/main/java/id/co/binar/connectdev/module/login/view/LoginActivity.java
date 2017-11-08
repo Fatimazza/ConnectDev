@@ -27,6 +27,12 @@ public class LoginActivity extends AppCompatActivity {
         facebookButton.setOnClickListener(onFacebookClicked);
     }
 
+    @Override
+    protected void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
+    }
+
     private View.OnClickListener onFacebookClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -45,10 +51,4 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
         }
     };
-
-    @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
-    }
 }

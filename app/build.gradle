@@ -1,14 +1,21 @@
 apply plugin: 'com.android.application'
 
+ext.versionMajor = 1
+ext.versionMinor = 0
+ext.versionPatch = 23
+ext.versionClassifier = null
+ext.isSnapshot = false
+ext.minimumSdkVersion = 15
+
 android {
-    compileSdkVersion 26
+    compileSdkVersion 25
     buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "id.co.binar.connectdev"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion project.ext.minimumSdkVersion
+        targetSdkVersion 25
+        versionCode generateVersionCode()
+        versionName generateVersionName()
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,12 +27,35 @@ android {
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
+private Integer generateVersionCode() {
+    return ext.minimumSdkVersion * 10000000 +
+            ext.versionMajor * 1000000 +
+            ext.versionMinor * 100000 +
+            ext.versionPatch * 10000
+}
+
+private String generateVersionName() {
+    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
+    if(ext.versionClassifier == null) {
+        if(ext.isSnapshot) {
+            ext.versionClassifier = "SNAPSHOT"
+        }
+    }
+
+    if(ext.versionClassifier != null) {
+        versionName += "-" + ext.versionClassifier
+    }
+
+    return versionName
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.28.0'
+
     testCompile 'junit:junit:4.12'
 }
