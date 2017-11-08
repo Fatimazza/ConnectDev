@@ -26,6 +26,10 @@
         fontPath="@string/font_arial_bold" />
 
     <include
+        android:id="@+id/rl_profile_contact"
+        layout="@layout/layout_profile_contact" />
+
+    <include
         android:id="@+id/rl_profile_detail"
         layout="@layout/layout_profile_detail" />
 
