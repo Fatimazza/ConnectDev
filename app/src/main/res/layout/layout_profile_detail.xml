@@ -21,7 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle_background_selector" />
+        android:background="@drawable/rectangle_background_selector"
+        android:enabled="false"
+        android:text="This field is describing me"/>
 
     <id.co.binar.connectdev.components.textview.ArialRoundedMtBold
         android:layout_width="wrap_content"
@@ -37,7 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle_background_selector" />
+        android:background="@drawable/rectangle_background_selector"
+        android:enabled="false"
+        android:text="List of my interest" />
 
     <id.co.binar.connectdev.components.textview.ArialRoundedMtBold
         android:layout_width="wrap_content"
@@ -53,6 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle_background_selector" />
+        android:background="@drawable/rectangle_background_selector"
+        android:enabled="true"
+        android:text="List of my skill" />
 
 </LinearLayout>
