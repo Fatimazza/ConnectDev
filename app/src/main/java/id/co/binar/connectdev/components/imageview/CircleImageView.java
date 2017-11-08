@@ -1,4 +1,4 @@
-package id.co.binar.connectdev.module.util;
+package id.co.binar.connectdev.components.imageview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
