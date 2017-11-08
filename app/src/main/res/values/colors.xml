@@ -2,8 +2,15 @@
 <resources>
     <color name="white_0">#fff</color>
     <color name="white_1">#f9f9f9</color>
+    <color name="violet_0">#663dbd</color>
+    <color name="gray_0">#93a8ac</color>
+    <color name="gray_1">#e7e4e4</color>
 
     <color name="colorPrimary">@color/white_0</color>
     <color name="colorPrimaryDark">@color/white_0</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="bottomBarTextActive">@color/violet_0</color>
+    <color name="bottomBarText">@color/gray_0</color>
+    <color name="separator">@color/gray_1</color>
 </resources>
