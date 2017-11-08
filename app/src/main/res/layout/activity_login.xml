@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/img_logo_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="72dp"
         android:src="@drawable/logo_login_text" />
 
     <id.co.binar.connectdev.components.textview.MontserratRegular
@@ -33,6 +33,7 @@
         android:textSize="24sp" />
 
     <ImageView
+        android:id="@+id/facebook_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_welcome"
