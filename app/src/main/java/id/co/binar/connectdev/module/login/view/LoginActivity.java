@@ -1,14 +1,15 @@
 package id.co.binar.connectdev.module.login.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.module.login.presenter.LoginPresenter;
-import id.co.binar.connectdev.module.login.presenter.OnLoginPresent;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        presenter = new LoginPresenter(loginView);
+        presenter = new LoginPresenter(this, loginView);
 
         facebookButton = (ImageView) findViewById(R.id.facebook_login_button);
         facebookButton.setOnClickListener(onFacebookClicked);
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onLoginSuccess() {
             // TODO: 11/8/17 Show Main Features
+            Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -51,4 +53,9 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
