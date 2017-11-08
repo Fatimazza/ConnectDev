@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_below="@id/btn_friends"
+    android:background="@color/transparent_pink"
+    android:gravity="center" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_mail" />
+
+        <id.co.binar.connectdev.components.textview.MontserratRegular
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email@mail.com"
+            android:textColor="#8024253d"
+            android:layout_marginLeft="8dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_phone" />
+
+        <id.co.binar.connectdev.components.textview.MontserratRegular
+            android:id="@+id/tv_handphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0812345678"
+            android:textColor="#8024253d"
+            android:layout_marginLeft="8dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_location" />
+
+        <id.co.binar.connectdev.components.textview.MontserratRegular
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:textColor="#8024253d"
+            android:layout_marginLeft="8dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -5,6 +5,8 @@
     <string name="facebook_app_id">278978302613421</string>
     <string name="fb_login_protocol_scheme">fb278978302613421</string>
 
+    <string name="font_arial_bold">font/ArialRoundedMt/ArialRoundedMt-Bold.ttf</string>
+
     <string name="profile_friends">%1$s Friends</string>
 
 </resources>
