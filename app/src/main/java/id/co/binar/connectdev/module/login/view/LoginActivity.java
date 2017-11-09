@@ -40,15 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         LoginManager.getInstance().registerCallback(facebookCallbackManager, facebookCallback);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        if (accessToken != null) {
-            routeToMain();
-        }
-    }
-
     private View.OnClickListener onFacebookClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -75,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     private void routeToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
