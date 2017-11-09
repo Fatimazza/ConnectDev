@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingPrefix"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,17 +15,52 @@
         android:text="About"
         android:layout_marginTop="7dp"
         android:textColor="#444444"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/et_about"
-        android:lineSpacingExtra="1dp"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/ll_about"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle_background_selector"
-        android:enabled="false"
-        android:text="This field is describing me"/>
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rectangle_white_shadow">
+
+        <EditText
+            android:id="@+id/et_about"
+            android:lineSpacingExtra="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/rectangle_background_selector"
+            android:enabled="false"
+            android:textColor="#878787"
+            android:text="This field is describing me" />
+
+        <LinearLayout
+            android:id="@+id/ll_social"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/iv_github"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/ic_github"/>
+
+            <ImageView
+                android:id="@+id/iv_linkedin"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/ic_linkedin"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <id.co.binar.connectdev.components.textview.ArialRoundedMtBold
         android:layout_width="wrap_content"
@@ -31,17 +68,29 @@
         android:text="Interest"
         android:layout_marginTop="7dp"
         android:textColor="#444444"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/et_interest"
-        android:maxLines="1"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/ll_interest"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle_background_selector"
-        android:enabled="false"
-        android:text="List of my interest" />
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rectangle_white_shadow">
+
+        <EditText
+            android:id="@+id/et_interest"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/rectangle_background_selector"
+            android:enabled="false"
+            android:textColor="#878787"
+            android:text="List of my interest" />
+
+    </LinearLayout>
 
     <id.co.binar.connectdev.components.textview.ArialRoundedMtBold
         android:layout_width="wrap_content"
@@ -49,16 +98,28 @@
         android:text="Skills"
         android:layout_marginTop="7dp"
         android:textColor="#444444"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/et_skill"
-        android:maxLines="1"
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/ll_skill"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/rectangle_background_selector"
-        android:enabled="true"
-        android:text="List of my skill" />
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rectangle_white_shadow">
+
+        <EditText
+            android:id="@+id/et_skill"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/rectangle_background_selector"
+            android:enabled="false"
+            android:textColor="#878787"
+            android:text="List of my skill" />
+
+    </LinearLayout>
 
 </LinearLayout>
