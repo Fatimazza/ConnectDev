@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="46dp"
+    android:layout_height="50dp"
     android:layout_gravity="bottom"
     android:orientation="vertical">
 
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Find"
                 android:textColor="@color/bottomBarText"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="Meetup"
                 android:textColor="@color/bottomBarText"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="Chat"
                 android:textColor="@color/bottomBarText"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:text="Friend"
                 android:textColor="@color/bottomBarText"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

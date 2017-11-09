@@ -13,4 +13,7 @@
     <color name="bottomBarTextActive">@color/violet_0</color>
     <color name="bottomBarText">@color/gray_0</color>
     <color name="separator">@color/gray_1</color>
+    <color name="cursor">@color/violet_0</color>
+    <color name="button_text">@color/violet_0</color>
+    <color name="borderList">@color/violet_0</color>
 </resources>
