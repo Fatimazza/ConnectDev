@@ -14,6 +14,7 @@ import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.bottombar.BottomBar;
 import id.co.binar.connectdev.components.bottombar.BottomBarListener;
 import id.co.binar.connectdev.module.find.view.FindFragment;
+import id.co.binar.connectdev.tools.FragmentUtils;
 
 /**
  * Created by rioswarawan on 11/8/17.
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomBarListener bottomBarListener = new BottomBarListener() {
         @Override
         public void onFindSelected() {
-            routeToFragment(new FindFragment());
+            FragmentUtils.startFragment(MainActivity.this, new FindFragment(), R.id.container);
         }
 
         @Override
@@ -59,11 +60,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "D", Toast.LENGTH_SHORT).show();
         }
     };
-
-    private void routeToFragment(Fragment fragment) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.addToBackStack(null);
-        ft.replace(R.id.container, fragment);
-        ft.commit();
-    }
 }

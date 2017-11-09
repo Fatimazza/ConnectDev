@@ -30,7 +30,7 @@
             android:paddingTop="8dp"
             android:src="@drawable/ic_notification" />
 
-        <ImageView
+        <id.co.binar.connectdev.components.imageview.CircleImageView
             android:id="@+id/image_profile"
             android:layout_width="50dp"
             android:layout_height="match_parent"
