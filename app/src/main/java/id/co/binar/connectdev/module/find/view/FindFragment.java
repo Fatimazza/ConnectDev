@@ -23,6 +23,7 @@ import id.co.binar.connectdev.module.find.presenter.FindFriendPresenter;
 import id.co.binar.connectdev.module.find.presenter.OnFindFriendListener;
 import id.co.binar.connectdev.module.profile.view.ProfileActivity;
 import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.tools.ActivityUtils;
 import id.co.binar.connectdev.tools.FragmentUtils;
 
 /**
@@ -78,7 +79,7 @@ public class FindFragment extends Fragment {
 
         @Override
         public void onProfileClicked() {
-
+            ActivityUtils.startActivity(getActivity(), ProfileActivity.class);
         }
     };
 
@@ -112,7 +113,7 @@ public class FindFragment extends Fragment {
     private OnFriendItemClickListener onFriendItemClickListener = new OnFriendItemClickListener() {
         @Override
         public void onFriendClicked(int position) {
-
+            ActivityUtils.startActivity(getActivity(), ProfileActivity.class);
         }
     };
 }
