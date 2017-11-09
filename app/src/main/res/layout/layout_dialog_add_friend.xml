@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical">
+
+        <include
+            android:id="@+id/rl_add_profpic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            layout="@layout/layout_profile_picture"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/rl_add_profpic" >
+
+            <id.co.binar.connectdev.components.textview.ArialRoundedMtBold
+                android:id="@+id/tv_add_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full name"
+                android:gravity="center_vertical"
+                android:textColor="#444444"
+                android:textSize="18sp"/>
+
+            <id.co.binar.connectdev.components.textview.ArialRoundedMtBold
+                android:id="@+id/tv_add_skill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_add_name"
+                android:text="User's Skill"
+                android:textColor="#898f9b"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <id.co.binar.connectdev.components.textview.MontserratRegular
+            android:id="@+id/tv_add_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="500 m"
+            android:textColor="#898f9b"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+    <id.co.binar.connectdev.components.textview.MontserratRegular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp" />
+
+    <id.co.binar.connectdev.components.textview.MontserratLight
+        android:id="@+id/tv_add_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec tellus efficitur, accumsan mauris ac, sagittis nulla."
+        android:textColor="#878787"
+        android:gravity="center"
+        android:textSize="14sp" />
+
+    <id.co.binar.connectdev.components.textview.MontserratRegular
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Note"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_add_note"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/rectangle_background"/>
+
+    <Button
+        android:id="@+id/btn_add_send_request"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/profile_detail_background"
+        android:text="SEND REQUEST"
+        android:textColor="@color/white_0"
+        android:visibility="visible" />
+
+</LinearLayout>
