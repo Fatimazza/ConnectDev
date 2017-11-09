@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="16dp"
-            android:visibility="visible" >
+            android:visibility="gone" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -80,6 +80,7 @@
                     android:background="@drawable/ic_github"/>
 
                 <EditText
+                    android:id="@+id/et_github"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -100,6 +101,7 @@
                     android:background="@drawable/ic_linkedin"/>
 
                 <EditText
+                    android:id="@+id/et_linkedin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -166,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="7dp"
-            android:enabled="true"
+            android:enabled="false"
             android:background="@color/transparent"
             android:textColor="#878787"
             android:text="List of my skill" />
