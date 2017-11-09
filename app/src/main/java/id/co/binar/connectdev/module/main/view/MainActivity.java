@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
         bottomBar.selectBar(0);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
+        System.exit(0);
+    }
+
     private BottomBarListener bottomBarListener = new BottomBarListener() {
         @Override
         public void onFindSelected() {

@@ -10,6 +10,6 @@ import retrofit2.http.POST;
 
 public interface RestApi {
 
-    @POST("/friend/search")
+    @POST("/search")
     Call<SearchFriend> getNearestFriend();
 }
