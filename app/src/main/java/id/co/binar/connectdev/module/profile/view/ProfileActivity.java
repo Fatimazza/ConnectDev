@@ -3,6 +3,7 @@ package id.co.binar.connectdev.module.profile.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.module.profile.presenter.OnLoadProfileListener;
+import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
+import id.co.binar.connectdev.network.model.Friend;
+
+import static id.co.binar.connectdev.App.getContext;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,12 +45,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button btnFriends;
     private Button btnAddFriend;
 
+    private ProfilePresenter profilePresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         initView();
         setListener();
+
+        profilePresenter = new ProfilePresenter();
+        profilePresenter.getProfile(onLoadProfileListener);
     }
 
     private void initView() {
@@ -106,16 +117,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private OnLoadProfileView loadProfileView = new OnLoadProfileView() {
+    private OnLoadProfileListener onLoadProfileListener = new OnLoadProfileListener() {
         @Override
-        public void onLoadProfileSucces() {
-            // TODO: 11/8/17 Show Profile
-            Toast.makeText(ProfileActivity.this, "Success", Toast.LENGTH_SHORT).show();
+        public void profileFetched(Friend friend) {
+            populateProfileData(friend);
         }
 
         @Override
-        public void onLoadProfileError(String message) {
-
+        public void onError(String message) {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         }
     };
+
+    private void populateProfileData(Friend friend) {
+        tvDistance.setText(friend.distance+" m");
+        tvFullname.setText(friend.name);
+        tvSkill.setText(friend.skill);
+        tvEmail.setText(friend.email);
+        tvHandphone.setText(friend.phone);
+        tvCity.setText(friend.city);
+        etAbout.setText(friend.about);
+        etSkill.setText(friend.skill);
+        etInterest.setText(friend.interest);
+        etGithub.setText(friend.github);
+        etLinkedin.setText(friend.linkedin);
+    }
 }

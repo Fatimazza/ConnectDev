@@ -89,7 +89,7 @@ public class BottomBar extends LinearLayout {
     private void state(ImageView baseIcon, @DrawableRes int modifiedIcon, TextView text, @ColorRes int modifiedTextColor) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             baseIcon.setImageDrawable(getContext().getDrawable(modifiedIcon));
-            text.setTextColor(getContext().getColor(modifiedTextColor));
+            text.setTextColor(getContext().getResources().getColor(modifiedTextColor));
         } else {
             baseIcon.setImageDrawable(getContext().getResources().getDrawable(modifiedIcon));
             text.setTextColor(getContext().getResources().getColor(modifiedTextColor));
