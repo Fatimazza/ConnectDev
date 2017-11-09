@@ -1,7 +1,9 @@
 package id.co.binar.connectdev.network;
 
+import id.co.binar.connectdev.network.model.Friend;
 import id.co.binar.connectdev.network.model.SearchFriend;
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 /**
@@ -10,6 +12,10 @@ import retrofit2.http.POST;
 
 public interface RestApi {
 
-    @POST("/friend/search")
+    @POST("/search")
     Call<SearchFriend> getNearestFriend();
+
+    @GET("/profile")
+    Call<Friend> getProfile();
+
 }
