@@ -48,6 +48,11 @@
 
         <!-- Finish: Facebook Configuration  -->
 
+        <activity
+            android:name=".module.profile.view.ProfileActivity"
+            android:theme="@style/AppTheme.FullScreen">
+
+        </activity>
     </application>
 
 </manifest>
