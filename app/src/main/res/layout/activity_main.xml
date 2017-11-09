@@ -6,7 +6,7 @@
     <id.co.binar.connectdev.components.bottombar.BottomBar
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true" />
 
     <FrameLayout

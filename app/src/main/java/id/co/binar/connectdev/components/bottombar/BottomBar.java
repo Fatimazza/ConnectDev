@@ -1,6 +1,9 @@
 package id.co.binar.connectdev.components.bottombar;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -71,18 +74,35 @@ public class BottomBar extends LinearLayout {
         this.buttonFriend.setOnClickListener(onFriendClicked);
     }
 
-    private void state(ImageView baseIcon, int modifiedIcon, TextView text) {
-        baseIcon.setImageDrawable(getContext().getDrawable(modifiedIcon));
-        text.setTextColor(getContext().getColor(R.color.bottomBarTextActive));
+    public void selectBar(int position) {
+        if (position == 0) {
+            buttonFind.performClick();
+        } else if (position == 1) {
+            buttonMeetup.performClick();
+        } else if (position == 2) {
+            buttonChat.performClick();
+        } else if (position == 3) {
+            buttonFriend.performClick();
+        }
+    }
+
+    private void state(ImageView baseIcon, @DrawableRes int modifiedIcon, TextView text, @ColorRes int modifiedTextColor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            baseIcon.setImageDrawable(getContext().getDrawable(modifiedIcon));
+            text.setTextColor(getContext().getColor(modifiedTextColor));
+        } else {
+            baseIcon.setImageDrawable(getContext().getResources().getDrawable(modifiedIcon));
+            text.setTextColor(getContext().getResources().getColor(modifiedTextColor));
+        }
     }
 
     private OnClickListener onFindClicked = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            state(imageFind, R.drawable.ic_find_active, textFind);
-            state(imageMeetup, R.drawable.ic_meetup, textMeetup);
-            state(imageChat, R.drawable.ic_chat, textChat);
-            state(imageFriend, R.drawable.ic_friend, textFriend);
+            state(imageFind, R.drawable.ic_find_active, textFind, R.color.bottomBarTextActive);
+            state(imageMeetup, R.drawable.ic_meetup, textMeetup, R.color.bottomBarText);
+            state(imageChat, R.drawable.ic_chat, textChat, R.color.bottomBarText);
+            state(imageFriend, R.drawable.ic_friend, textFriend, R.color.bottomBarText);
 
             listener.onFindSelected();
         }
@@ -91,10 +111,10 @@ public class BottomBar extends LinearLayout {
     private OnClickListener onMeetupClicked = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            state(imageFind, R.drawable.ic_find, textFind);
-            state(imageMeetup, R.drawable.ic_find_active, textMeetup);
-            state(imageChat, R.drawable.ic_chat, textChat);
-            state(imageFriend, R.drawable.ic_friend, textFriend);
+            state(imageFind, R.drawable.ic_find, textFind, R.color.bottomBarText);
+            state(imageMeetup, R.drawable.ic_find_active, textMeetup, R.color.bottomBarTextActive);
+            state(imageChat, R.drawable.ic_chat, textChat, R.color.bottomBarText);
+            state(imageFriend, R.drawable.ic_friend, textFriend, R.color.bottomBarText);
 
             listener.onMeetupSelected();
         }
@@ -103,10 +123,10 @@ public class BottomBar extends LinearLayout {
     private OnClickListener onChatClicked = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            state(imageFind, R.drawable.ic_find, textMeetup);
-            state(imageMeetup, R.drawable.ic_meetup, textMeetup);
-            state(imageChat, R.drawable.ic_find_active, textChat);
-            state(imageFriend, R.drawable.ic_friend, textFriend);
+            state(imageFind, R.drawable.ic_find, textMeetup, R.color.bottomBarText);
+            state(imageMeetup, R.drawable.ic_meetup, textMeetup, R.color.bottomBarText);
+            state(imageChat, R.drawable.ic_find_active, textChat, R.color.bottomBarTextActive);
+            state(imageFriend, R.drawable.ic_friend, textFriend, R.color.bottomBarText);
 
             listener.onChatSelected();
         }
@@ -115,10 +135,10 @@ public class BottomBar extends LinearLayout {
     private OnClickListener onFriendClicked = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            state(imageFind, R.drawable.ic_find, textMeetup);
-            state(imageMeetup, R.drawable.ic_meetup, textMeetup);
-            state(imageChat, R.drawable.ic_chat, textChat);
-            state(imageFriend, R.drawable.ic_find_active, textFriend);
+            state(imageFind, R.drawable.ic_find, textMeetup, R.color.bottomBarText);
+            state(imageMeetup, R.drawable.ic_meetup, textMeetup, R.color.bottomBarText);
+            state(imageChat, R.drawable.ic_chat, textChat, R.color.bottomBarText);
+            state(imageFriend, R.drawable.ic_find_active, textFriend, R.color.bottomBarTextActive);
 
             listener.onFriendSelected();
         }
