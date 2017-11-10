@@ -1,6 +1,7 @@
 package id.co.binar.connectdev.module.profile.view;
 
 
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,133 +14,98 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.components.toolbar.SimpleToolbar;
+import id.co.binar.connectdev.components.toolbar.SimpleToolbarListener;
+import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.module.profile.presenter.OnLoadProfileListener;
 import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
 import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.tools.ActivityUtils;
 
 import static id.co.binar.connectdev.App.getContext;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity {
 
-    private ImageView ivAvatar;
-    private ImageView ivOnlineIndicator;
+    public static final String paramKey = ProfileActivity.class.getName();
 
-    private TextView tvDistance;
-    private TextView tvFullname;
-    private TextView tvSkill;
+    private SimpleToolbar toolbar;
+    private TextView textName, textSkill, textDistance, textTotalFriend;
+    private TextView textPhone, textEmail, textCity;
+    private TextView textUserAbout, textUserInterest, textUserSkill;
+    private ImageView imageProfile, imageDribble, imageLinkedin, imageGithub;
+    private Button buttonAddFriend;
+    private Button buttonChat;
 
-    private TextView tvEmail;
-    private TextView tvHandphone;
-    private TextView tvCity;
-
-    private LinearLayout llSocial;
-    private LinearLayout llSocialEdit;
-
-    private EditText etAbout;
-    private EditText etInterest;
-    private EditText etSkill;
-
-    private EditText etGithub;
-    private EditText etLinkedin;
-
-    private Button btnFriends;
-    private Button btnAddFriend;
-
-    private ProfilePresenter profilePresenter;
+    private Profile profile;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        initView();
-        setListener();
 
-        profilePresenter = new ProfilePresenter();
-        profilePresenter.getProfile(onLoadProfileListener);
+        profile = ActivityUtils.getParam(this, paramKey, Profile.class);
+
+        toolbar = (SimpleToolbar) findViewById(R.id.toolbar);
+        textName = (TextView) findViewById(R.id.text_name);
+        textSkill = (TextView) findViewById(R.id.text_skill);
+        textDistance = (TextView) findViewById(R.id.text_distance);
+        textTotalFriend = (TextView) findViewById(R.id.text_total_friend);
+        textPhone = (TextView) findViewById(R.id.text_phone);
+        textEmail = (TextView) findViewById(R.id.text_email);
+        textCity = (TextView) findViewById(R.id.text_city);
+        textUserAbout = (TextView) findViewById(R.id.text_user_about);
+        textUserInterest = (TextView) findViewById(R.id.text_user_interest);
+        textUserSkill = (TextView) findViewById(R.id.text_user_skill);
+        imageProfile = (ImageView) findViewById(R.id.image_profile);
+        imageDribble = (ImageView) findViewById(R.id.image_dribble);
+        imageLinkedin = (ImageView) findViewById(R.id.image_linkedin);
+        imageGithub = (ImageView) findViewById(R.id.image_github);
+        buttonAddFriend = (Button) findViewById(R.id.button_add_friend);
+        buttonChat = (Button) findViewById(R.id.button_chat);
+
+        buttonAddFriend.setOnClickListener(onAddFriendClicked);
+        buttonChat.setOnClickListener(onChatClicked);
+
+        toolbar.setListener(simpleToolbarListener);
+        toolbar.setName("Profile");
+
+        configureProfile();
     }
 
-    private void initView() {
-        ivAvatar = (ImageView) findViewById(R.id.img_avatar);
-        ivOnlineIndicator = (ImageView) findViewById(R.id.iv_online_indicator);
+    private void configureProfile() {
 
-        tvDistance = (TextView) findViewById(R.id.tv_distance);
-        tvFullname = (TextView) findViewById(R.id.tv_name);
-        tvSkill = (TextView) findViewById(R.id.tv_skill);
-        tvEmail = (TextView) findViewById(R.id.tv_email);
-        tvHandphone = (TextView) findViewById(R.id.tv_handphone);
-        tvCity = (TextView) findViewById(R.id.tv_city);
-
-        llSocial = (LinearLayout) findViewById(R.id.ll_social);
-        llSocialEdit = (LinearLayout) findViewById(R.id.ll_social_edit);
-
-        etAbout = (EditText) findViewById(R.id.et_about);
-        etInterest = (EditText) findViewById(R.id.et_interest);
-        etSkill = (EditText) findViewById(R.id.et_skill);
-        etGithub = (EditText) findViewById(R.id.et_github);
-        etLinkedin = (EditText) findViewById(R.id.et_linkedin);
-
-        btnFriends = (Button) findViewById(R.id.btn_friends);
-        btnAddFriend = (Button) findViewById(R.id.btn_add_friend);
-    }
-
-    private void setListener() {
-        btnFriends.setOnClickListener(this);
-        btnAddFriend.setOnClickListener(this);
-    }
-
-    private void editProfile() {
-        llSocial.setVisibility(View.GONE);
-        llSocialEdit.setVisibility(View.VISIBLE);
-        etAbout.setEnabled(true);
-        etInterest.setEnabled(true);
-        etSkill.setEnabled(true);
-        btnAddFriend.setVisibility(View.GONE);
-    }
-
-    private void saveProfile() {
-        llSocial.setVisibility(View.VISIBLE);
-        llSocialEdit.setVisibility(View.GONE);
-        etAbout.setEnabled(false);
-        etInterest.setEnabled(false);
-        etSkill.setEnabled(false);
-        btnAddFriend.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_friends:
-                saveProfile();
-                break;
-            case R.id.btn_add_friend:
-                editProfile();
-                break;
+        if (profile.self) {
+            toolbar.edit(true);
+            buttonAddFriend.setVisibility(View.GONE);
+        } else {
+            toolbar.edit(false);
+            buttonAddFriend.setVisibility(profile.friend ? View.GONE : View.VISIBLE);
         }
     }
 
-    private OnLoadProfileListener onLoadProfileListener = new OnLoadProfileListener() {
+    private SimpleToolbarListener simpleToolbarListener = new SimpleToolbarListener() {
         @Override
-        public void profileFetched(Friend friend) {
-            populateProfileData(friend);
+        public void onDestroy() {
+            onBackPressed();
         }
 
         @Override
-        public void onError(String message) {
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        public void onEdit() {
+
         }
     };
 
-    private void populateProfileData(Friend friend) {
-        tvDistance.setText(friend.distance+" m");
-        tvFullname.setText(friend.name);
-        tvSkill.setText(friend.skill);
-        tvEmail.setText(friend.email);
-        tvHandphone.setText(friend.phone);
-        tvCity.setText(friend.city);
-        etAbout.setText(friend.about);
-        etSkill.setText(friend.skill);
-        etInterest.setText(friend.interest);
-        etGithub.setText(friend.github);
-        etLinkedin.setText(friend.linkedin);
-    }
+    private View.OnClickListener onChatClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ActivityUtils.startActivityUrl(ProfileActivity.this, "fb://messaging/24353623");
+        }
+    };
+
+    private View.OnClickListener onAddFriendClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
 }
