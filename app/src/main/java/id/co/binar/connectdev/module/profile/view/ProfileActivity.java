@@ -4,25 +4,19 @@ package id.co.binar.connectdev.module.profile.view;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbar;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbarListener;
 import id.co.binar.connectdev.module.profile.model.Profile;
-import id.co.binar.connectdev.module.profile.presenter.OnLoadProfileListener;
-import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
-import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestDialog;
+import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestListener;
+import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestSentDialog;
 import id.co.binar.connectdev.tools.ActivityUtils;
-
-import static id.co.binar.connectdev.App.getContext;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -37,6 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button buttonChat;
 
     private Profile profile;
+    private FriendRequestDialog friendRequestDialog;
+    private FriendRequestSentDialog friendRequestSentDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
         toolbar.setListener(simpleToolbarListener);
         toolbar.setName("Profile");
 
+        friendRequestDialog = new FriendRequestDialog(this, friendRequestListener);
+        friendRequestSentDialog = new FriendRequestSentDialog(this);
+
         configureProfile();
     }
 
@@ -77,6 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (profile.self) {
             toolbar.edit(true);
             buttonAddFriend.setVisibility(View.GONE);
+            buttonChat.setVisibility(View.GONE);
         } else {
             toolbar.edit(false);
             buttonAddFriend.setVisibility(profile.friend ? View.GONE : View.VISIBLE);
@@ -105,7 +105,15 @@ public class ProfileActivity extends AppCompatActivity {
     private View.OnClickListener onAddFriendClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            friendRequestDialog.getDialog().show();
+        }
+    };
 
+    private FriendRequestListener friendRequestListener = new FriendRequestListener() {
+        @Override
+        public void onRequestSent() {
+            friendRequestDialog.getDialog().dismiss();
+            friendRequestSentDialog.show();
         }
     };
 }
