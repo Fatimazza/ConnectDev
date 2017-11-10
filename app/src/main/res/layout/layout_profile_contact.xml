@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_below="@id/btn_friends"
+    android:layout_marginTop="8dp"
     android:background="@color/blue_1"
-    android:gravity="center" >
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="15dp"
@@ -22,23 +21,22 @@
             android:src="@drawable/ic_mail" />
 
         <id.co.binar.connectdev.components.textview.MontserratRegular
-            android:id="@+id/tv_email"
+            android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:text="email@mail.com"
             android:textColor="#8024253d"
-            android:layout_marginLeft="8dp"
             android:textSize="14sp" />
-
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="15dp"
@@ -46,23 +44,22 @@
             android:src="@drawable/ic_phone" />
 
         <id.co.binar.connectdev.components.textview.MontserratRegular
-            android:id="@+id/tv_handphone"
+            android:id="@+id/text_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:text="0812345678"
             android:textColor="#8024253d"
-            android:layout_marginLeft="8dp"
             android:textSize="14sp" />
-
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="15dp"
@@ -70,12 +67,12 @@
             android:src="@drawable/ic_location" />
 
         <id.co.binar.connectdev.components.textview.MontserratRegular
-            android:id="@+id/tv_city"
+            android:id="@+id/text_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:text="City"
             android:textColor="#8024253d"
-            android:layout_marginLeft="8dp"
             android:textSize="14sp" />
 
     </LinearLayout>
