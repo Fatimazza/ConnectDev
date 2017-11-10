@@ -1,5 +1,6 @@
 package id.co.binar.connectdev.module.find.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -75,7 +76,7 @@ public class FindFragment extends Fragment {
     private ToolbarListener toolbarListener = new ToolbarListener() {
         @Override
         public void onNotificationClicked() {
-
+            ActivityUtils.startActivityUrl(getActivity(), "fb://messaging/24353623");
         }
 
         @Override

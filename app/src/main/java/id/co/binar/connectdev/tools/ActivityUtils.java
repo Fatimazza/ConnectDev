@@ -7,6 +7,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -94,6 +95,16 @@ public class ActivityUtils {
      */
     public static final void startActivitySetting(@NonNull Activity activityFrom) {
         Intent intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activityFrom.startActivity(intent);
+    }
+
+    /**
+     * Start android system setting page
+     */
+    public static final void startActivityUrl(@NonNull Activity activityFrom, String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activityFrom.startActivity(intent);
     }
