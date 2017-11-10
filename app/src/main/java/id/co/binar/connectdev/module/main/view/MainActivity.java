@@ -14,6 +14,7 @@ import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.bottombar.BottomBar;
 import id.co.binar.connectdev.components.bottombar.BottomBarListener;
 import id.co.binar.connectdev.module.find.view.FindFragment;
+import id.co.binar.connectdev.module.meetup.view.MeetupFragment;
 import id.co.binar.connectdev.tools.FragmentUtils;
 
 /**
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onMeetupSelected() {
-            Toast.makeText(MainActivity.this, "B", Toast.LENGTH_SHORT).show();
+            FragmentUtils.startFragment(MainActivity.this, new MeetupFragment(), R.id.container);
         }
 
         @Override
