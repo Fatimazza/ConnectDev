@@ -56,7 +56,7 @@
                 android:layout_centerVertical="true"
                 android:text="Android Developer"
                 android:textColor="@color/descriptionText"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
 

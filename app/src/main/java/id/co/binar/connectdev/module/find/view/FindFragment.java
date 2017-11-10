@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.components.layoutmanager.NonScrollableLinearLayoutManager;
 import id.co.binar.connectdev.components.toolbar.Toolbar;
 import id.co.binar.connectdev.components.toolbar.ToolbarListener;
 import id.co.binar.connectdev.module.find.presenter.FindFriendPresenter;
@@ -63,7 +64,7 @@ public class FindFragment extends Fragment {
         adapter = new FriendAdapter(getActivity(), friends, onFriendItemClickListener);
         recyclerUser = (RecyclerView) contentView.findViewById(R.id.recycler_user);
         recyclerUser.setAdapter(adapter);
-        recyclerUser.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerUser.setLayoutManager(new NonScrollableLinearLayoutManager(getActivity()));
 
         presenter = new FindFriendPresenter();
         presenter.getNearestFriend(onFindFriendListener);
