@@ -112,7 +112,7 @@ public class BottomBar extends LinearLayout {
         @Override
         public void onClick(View view) {
             state(imageFind, R.drawable.ic_find, textFind, R.color.bottomBarText);
-            state(imageMeetup, R.drawable.ic_find_active, textMeetup, R.color.bottomBarTextActive);
+            state(imageMeetup, R.drawable.ic_meetup_active, textMeetup, R.color.bottomBarTextActive);
             state(imageChat, R.drawable.ic_chat, textChat, R.color.bottomBarText);
             state(imageFriend, R.drawable.ic_friend, textFriend, R.color.bottomBarText);
 
@@ -138,7 +138,7 @@ public class BottomBar extends LinearLayout {
             state(imageFind, R.drawable.ic_find, textMeetup, R.color.bottomBarText);
             state(imageMeetup, R.drawable.ic_meetup, textMeetup, R.color.bottomBarText);
             state(imageChat, R.drawable.ic_chat, textChat, R.color.bottomBarText);
-            state(imageFriend, R.drawable.ic_find_active, textFriend, R.color.bottomBarTextActive);
+            state(imageFriend, R.drawable.ic_friend_active, textFriend, R.color.bottomBarTextActive);
 
             listener.onFriendSelected();
         }
