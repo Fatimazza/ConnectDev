@@ -23,6 +23,7 @@ import id.co.binar.connectdev.components.toolbar.Toolbar;
 import id.co.binar.connectdev.components.toolbar.ToolbarListener;
 import id.co.binar.connectdev.module.find.presenter.FindFriendPresenter;
 import id.co.binar.connectdev.module.find.presenter.OnFindFriendListener;
+import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.module.profile.view.ProfileActivity;
 import id.co.binar.connectdev.network.model.Friend;
 import id.co.binar.connectdev.tools.ActivityUtils;
@@ -76,12 +77,14 @@ public class FindFragment extends Fragment {
     private ToolbarListener toolbarListener = new ToolbarListener() {
         @Override
         public void onNotificationClicked() {
-            ActivityUtils.startActivityUrl(getActivity(), "fb://messaging/24353623");
         }
 
         @Override
         public void onProfileClicked() {
-            ActivityUtils.startActivity(getActivity(), ProfileActivity.class);
+            Profile profile = new Profile();
+            profile.self = true;
+
+            ActivityUtils.startActivityWParam(getActivity(), ProfileActivity.class, ProfileActivity.paramKey, profile);
         }
     };
 
@@ -115,7 +118,11 @@ public class FindFragment extends Fragment {
     private OnFriendItemClickListener onFriendItemClickListener = new OnFriendItemClickListener() {
         @Override
         public void onFriendClicked(int position) {
-            ActivityUtils.startActivity(getActivity(), ProfileActivity.class);
+            Profile profile = new Profile();
+            profile.self = false;
+            profile.friend = position % 2 == 0;
+
+            ActivityUtils.startActivityWParam(getActivity(), ProfileActivity.class, ProfileActivity.paramKey, profile);
         }
     };
 }

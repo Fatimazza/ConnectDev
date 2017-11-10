@@ -16,24 +16,34 @@ import android.widget.Toast;
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbar;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbarListener;
+import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.module.profile.presenter.OnLoadProfileListener;
 import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
 import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.tools.ActivityUtils;
 
 import static id.co.binar.connectdev.App.getContext;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    public static final String paramKey = ProfileActivity.class.getName();
 
     private SimpleToolbar toolbar;
     private TextView textName, textSkill, textDistance, textTotalFriend;
     private TextView textPhone, textEmail, textCity;
     private TextView textUserAbout, textUserInterest, textUserSkill;
     private ImageView imageProfile, imageDribble, imageLinkedin, imageGithub;
+    private Button buttonAddFriend;
+    private Button buttonChat;
+
+    private Profile profile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        profile = ActivityUtils.getParam(this, paramKey, Profile.class);
 
         toolbar = (SimpleToolbar) findViewById(R.id.toolbar);
         textName = (TextView) findViewById(R.id.text_name);
@@ -50,22 +60,45 @@ public class ProfileActivity extends AppCompatActivity {
         imageDribble = (ImageView) findViewById(R.id.image_dribble);
         imageLinkedin = (ImageView) findViewById(R.id.image_linkedin);
         imageGithub = (ImageView) findViewById(R.id.image_github);
+        buttonAddFriend = (Button) findViewById(R.id.button_add_friend);
+        buttonChat = (Button) findViewById(R.id.button_chat);
+
+        buttonAddFriend.setOnClickListener(onAddFriendClicked);
+        buttonChat.setOnClickListener(onChatClicked);
 
         toolbar.setListener(simpleToolbarListener);
         toolbar.setName("Profile");
+
+        configureProfile();
+    }
+
+    private void configureProfile() {
+
+        if (profile.self) {
+            toolbar.edit(true);
+            buttonAddFriend.setVisibility(View.GONE);
+        } else {
+            toolbar.edit(false);
+            buttonAddFriend.setVisibility(profile.friend ? View.GONE : View.VISIBLE);
+        }
     }
 
     private SimpleToolbarListener simpleToolbarListener = new SimpleToolbarListener() {
         @Override
         public void onDestroy() {
-            finish();
+            onBackPressed();
+        }
+
+        @Override
+        public void onEdit() {
+
         }
     };
 
     private View.OnClickListener onChatClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            
+            ActivityUtils.startActivityUrl(ProfileActivity.this, "fb://messaging/24353623");
         }
     };
 

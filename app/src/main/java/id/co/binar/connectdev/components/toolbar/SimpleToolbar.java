@@ -20,7 +20,7 @@ import id.co.binar.connectdev.R;
 public class SimpleToolbar extends LinearLayout {
 
     private View rootView;
-    private ImageView imageBack;
+    private ImageView imageBack, imageEdit;
     private TextView textName;
 
     private SimpleToolbarListener listener;
@@ -38,12 +38,18 @@ public class SimpleToolbar extends LinearLayout {
     private void init(Context context) {
         this.rootView = LayoutInflater.from(context).inflate(R.layout.view_toolbar_simple, this, true);
         this.imageBack = (ImageView) rootView.findViewById(R.id.button_back);
+        this.imageEdit = (ImageView) rootView.findViewById(R.id.button_edit);
         this.textName = (TextView) rootView.findViewById(R.id.text_name);
     }
 
     public void setListener(SimpleToolbarListener listener) {
         this.listener = listener;
         this.imageBack.setOnClickListener(onBackClicked);
+        this.imageEdit.setOnClickListener(onEditClicked);
+    }
+
+    public void edit(boolean hasEdit) {
+        this.imageEdit.setVisibility(hasEdit ? VISIBLE : GONE);
     }
 
     public void setName(String name) {
@@ -54,6 +60,12 @@ public class SimpleToolbar extends LinearLayout {
         @Override
         public void onClick(View view) {
             listener.onDestroy();
+        }
+    };
+    private OnClickListener onEditClicked = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            listener.onEdit();
         }
     };
 }

@@ -6,4 +6,6 @@ package id.co.binar.connectdev.components.toolbar;
 
 public interface SimpleToolbarListener {
     void onDestroy();
+
+    void onEdit();
 }
