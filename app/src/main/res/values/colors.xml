@@ -23,7 +23,7 @@
     <color name="green_0">#5eff00</color>
 
     <color name="colorPrimary">@color/white_0</color>
-    <color name="colorPrimaryDark">@color/white_0</color>
+    <color name="colorPrimaryDark">@color/gray_0</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="bottomBarTextActive">@color/violet_0</color>

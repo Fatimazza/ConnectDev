@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.module.meetup.view.dialog.CreateMeetupDialog;
 
 /**
  * Created by rioswarawan on 11/11/17.
@@ -20,6 +21,8 @@ public class CreateMeetupActivity extends AppCompatActivity {
     private Button addPhoto, addCreate;
     private ImageView featuredImage, imageUser1, imageUser2, imageUser3;
 
+    private CreateMeetupDialog createMeetupDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +30,18 @@ public class CreateMeetupActivity extends AppCompatActivity {
 
         addPhoto = (Button) findViewById(R.id.button_add_photo);
         addCreate = (Button) findViewById(R.id.button_create);
+        featuredImage = (ImageView) findViewById(R.id.featured_image);
+        imageUser1 = (ImageView) findViewById(R.id.image_user_1);
+        imageUser2 = (ImageView) findViewById(R.id.image_user_2);
+        imageUser3 = (ImageView) findViewById(R.id.image_user_3);
+        addCreate = (Button) findViewById(R.id.button_create);
 
+
+        createMeetupDialog = new CreateMeetupDialog(this);
         configure();
+
+        addPhoto.setOnClickListener(onAddPhotoClicked);
+        addCreate.setOnClickListener(onCreateClicked);
     }
 
     private void configure() {
@@ -56,7 +69,7 @@ public class CreateMeetupActivity extends AppCompatActivity {
     private View.OnClickListener onCreateClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            createMeetupDialog.show();
         }
     };
 }

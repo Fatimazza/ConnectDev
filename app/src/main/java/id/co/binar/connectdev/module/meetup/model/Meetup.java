@@ -12,9 +12,10 @@ public class Meetup {
 
     public int id;
     public String name;
+    public String photo;
     public String desc;
     public String place;
     public String waktu;
     public String date;
-    public List<FriendResponse> users;
+    public List<FriendResponse> friend;
 }

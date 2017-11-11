@@ -56,23 +56,9 @@ public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         });
 
-        if (position % 4 == 0) {
-            Glide.with(context)
-                    .load("https://randomuser.me/api/portraits/med/women/71.jpg")
-                    .into(viewHolder.image);
-        } else if (position % 3 == 0) {
-            Glide.with(context)
-                    .load("https://randomuser.me/api/portraits/med/men/7.jpg")
-                    .into(viewHolder.image);
-        } else if (position % 2 == 0) {
-            Glide.with(context)
-                    .load("https://randomuser.me/api/portraits/med/men/22.jpg")
-                    .into(viewHolder.image);
-        } else if (position % 1 == 0) {
-            Glide.with(context)
-                    .load("https://randomuser.me/api/portraits/med/men/71.jpg")
-                    .into(viewHolder.image);
-        }
+        Glide.with(context)
+                .load(friendResponse.photo)
+                .into(viewHolder.image);
     }
 
     @Override

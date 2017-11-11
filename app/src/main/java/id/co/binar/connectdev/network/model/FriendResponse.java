@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class FriendResponse {
 
     public String name;
+    public String photo;
     public String email;
     public String skill;
     public String interest;

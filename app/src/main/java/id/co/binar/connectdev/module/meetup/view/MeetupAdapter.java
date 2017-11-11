@@ -12,9 +12,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.Random;
 
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.module.meetup.model.Meetup;
+import id.co.binar.connectdev.network.model.FriendResponse;
 
 /**
  * Created by rioswarawan on 11/9/17.
@@ -26,8 +28,6 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<Meetup> meetups;
     private LayoutInflater inflater;
     private OnMeetupItemListener onMeetupItemListener;
-
-    private int totalUser = 5;
 
     public MeetupAdapter(Context context, List<Meetup> meetups, OnMeetupItemListener onMeetupItemListener) {
         this.context = context;
@@ -53,24 +53,25 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         viewHolder.date.setText(meetup.date);
         viewHolder.timeRange.setText(meetup.waktu);
 
-        for (int i = 0; i < totalUser; i++) {
+        for (int i = 0; i < 3; i++) {
+            FriendResponse friendResponse = meetup.friend.get(i);
             if (i == 0) {
                 Glide.with(context)
-                        .load("https://randomuser.me/api/portraits/med/women/71.jpg")
+                        .load(friendResponse.photo)
                         .into(viewHolder.imageUser1);
             } else if (i == 1) {
                 Glide.with(context)
-                        .load("https://randomuser.me/api/portraits/med/women/71.jpg")
+                        .load(friendResponse.photo)
                         .into(viewHolder.imageUser2);
             } else if (i == 2) {
                 Glide.with(context)
-                        .load("https://randomuser.me/api/portraits/med/women/71.jpg")
+                        .load(friendResponse.photo)
                         .into(viewHolder.imageUser3);
             }
         }
 
-        if (totalUser - 3 != 0) {
-            String count = String.valueOf(totalUser - 3);
+        if (meetup.friend.size() - 3 > 0) {
+            String count = String.valueOf(meetup.friend.size() - 3);
             viewHolder.more.setText("+" + count);
         }
 
@@ -80,6 +81,30 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 onMeetupItemListener.onSelect(position);
             }
         });
+    }
+
+    private String randomGender() {
+        Random rn = new Random();
+        int range = 100 - 0 + 1;
+        int random = rn.nextInt(range);
+
+        if (random % 2 == 0) {
+            return "men";
+        } else {
+            return "women";
+        }
+    }
+
+    private int randomUser() {
+        Random rn = new Random();
+        int range = 100 - 0 + 1;
+        return rn.nextInt(range);
+    }
+
+    private int randomTotalUser() {
+        Random rn = new Random();
+        int range = 5 - 0 + 1;
+        return rn.nextInt(range);
     }
 
     @Override

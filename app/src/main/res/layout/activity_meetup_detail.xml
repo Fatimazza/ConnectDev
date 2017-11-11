@@ -25,9 +25,11 @@
                 android:padding="16dp">
 
                 <ImageView
+                    android:id="@+id/featuredImage"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:src="#aaa" />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logo_react" />
 
                 <id.co.binar.connectdev.components.textview.MontserratBold
                     android:id="@+id/text_title"

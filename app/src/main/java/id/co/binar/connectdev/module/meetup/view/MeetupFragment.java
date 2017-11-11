@@ -3,6 +3,7 @@ package id.co.binar.connectdev.module.meetup.view;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import id.co.binar.connectdev.components.layoutmanager.NonScrollableLinearLayout
 import id.co.binar.connectdev.module.meetup.model.Meetup;
 import id.co.binar.connectdev.module.meetup.presenter.MeetupPresenter;
 import id.co.binar.connectdev.module.meetup.presenter.OnMeetupListener;
+import id.co.binar.connectdev.module.meetup.view.dialog.CreateMeetupDialog;
+import id.co.binar.connectdev.module.meetupcreate.view.CreateMeetupActivity;
 import id.co.binar.connectdev.module.meetupdetail.view.MeetupDetailActivity;
 import id.co.binar.connectdev.tools.ActivityUtils;
 
@@ -30,6 +33,7 @@ public class MeetupFragment extends Fragment {
 
     private EditText inputSearch;
     private RecyclerView recyclerMeetup;
+    private FloatingActionButton floatingActionButton;
 
     private List<Meetup> meetups;
     private MeetupAdapter adapter;
@@ -45,10 +49,13 @@ public class MeetupFragment extends Fragment {
         meetups = new ArrayList<>();
         adapter = new MeetupAdapter(getActivity(), meetups, onMeetupItemListener);
 
+        floatingActionButton = (FloatingActionButton) contentView.findViewById(R.id.button_add_meetup);
         inputSearch = (EditText) contentView.findViewById(R.id.input_search);
         recyclerMeetup = (RecyclerView) contentView.findViewById(R.id.recycler_meetup);
         recyclerMeetup.setAdapter(adapter);
         recyclerMeetup.setLayoutManager(new NonScrollableLinearLayoutManager(getActivity()));
+
+        floatingActionButton.setOnClickListener(onFabClicked);
 
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Brewing the coffee");
@@ -59,20 +66,27 @@ public class MeetupFragment extends Fragment {
         return contentView;
     }
 
+    private View.OnClickListener onFabClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ActivityUtils.startActivity(getActivity(), CreateMeetupActivity.class);
+        }
+    };
+
     private OnMeetupItemListener onMeetupItemListener = new OnMeetupItemListener() {
         @Override
         public void onSelect(int position) {
-            ActivityUtils.startActivity(getActivity(), MeetupDetailActivity.class);
+            Meetup meetup = meetups.get(position);
+
+            ActivityUtils.startActivityWParam(getActivity(), MeetupDetailActivity.class, MeetupDetailActivity.paramKey, meetup);
         }
     };
 
     private OnMeetupListener onMeetupListener = new OnMeetupListener() {
         @Override
         public void meetupFetched(List<Meetup> meetups) {
-            if (meetups != null) {
-                MeetupFragment.this.meetups.addAll(meetups);
-                MeetupFragment.this.adapter.notifyDataSetChanged();
-            }
+            MeetupFragment.this.meetups.addAll(meetups);
+            MeetupFragment.this.adapter.notifyDataSetChanged();
         }
 
         @Override

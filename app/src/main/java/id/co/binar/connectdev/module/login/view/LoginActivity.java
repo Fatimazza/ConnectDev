@@ -13,8 +13,13 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -55,7 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         public void onSuccess(LoginResult loginResult) {
             String userId = loginResult.getAccessToken().getUserId();
             GlobalCache.write(CacheKey.facebookUserId, userId, String.class);
-            routeToMain();
+
+            runFacebookGraph();
         }
 
         @Override
@@ -67,6 +73,30 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
     };
+
+    private void runFacebookGraph() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                try {
+                    String userId = GlobalCache.read(CacheKey.facebookUserId, String.class);
+                    String id = jsonObject.getString("id");
+                    String name = jsonObject.getString("name");
+                    String photo = "https://graph.facebook.com/" + userId + "/picture?type=large";
+
+                    routeToMain();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,gender,birthday");
+        graphRequest.setParameters(parameters);
+        graphRequest.executeAsync();
+    }
 
     private void routeToMain() {
         Intent intent = new Intent(this, MainActivity.class);

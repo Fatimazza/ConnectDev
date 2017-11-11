@@ -20,6 +20,7 @@ import java.util.List;
 
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.layoutmanager.NonScrollableLinearLayoutManager;
+import id.co.binar.connectdev.module.advancedsearch.view.AdvanceSearchActivity;
 import id.co.binar.connectdev.module.find.presenter.FindFriendPresenter;
 import id.co.binar.connectdev.module.find.presenter.OnFindFriendListener;
 import id.co.binar.connectdev.module.profile.model.Profile;
@@ -79,7 +80,7 @@ public class FindFragment extends Fragment {
     private View.OnClickListener onAdvanceSearchClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            ActivityUtils.startActivity(getActivity(), AdvanceSearchActivity.class);
         }
     };
 
@@ -118,9 +119,12 @@ public class FindFragment extends Fragment {
     private OnFriendItemClickListener onFriendItemClickListener = new OnFriendItemClickListener() {
         @Override
         public void onFriendClicked(int position) {
+            FriendResponse friend = friendResponses.get(position);
+
             Profile profile = new Profile();
             profile.self = false;
             profile.friend = position % 2 == 0;
+            profile.profile = friend;
 
             ActivityUtils.startActivityWParam(getActivity(), ProfileActivity.class, ProfileActivity.paramKey, profile);
         }

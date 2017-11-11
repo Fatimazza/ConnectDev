@@ -93,7 +93,26 @@ public class ProfileActivity extends AppCompatActivity {
         if (profile.self) {
             presenter.getProfile(onLoadProfileListener);
         } else {
-            presenter.getProfile(onLoadProfileListener);
+
+            Glide.with(ProfileActivity.this)
+                    .load(profile.profile.photo)
+                    .into(imageProfile);
+
+            textName.setText(profile.profile.name);
+            textSkill.setText(profile.profile.skill);
+            textTotalFriend.setText(profile.profile.friends + " Friend(s)");
+            textEmail.setText(profile.profile.email);
+            textPhone.setText(profile.profile.phone);
+            textCity.setText(profile.profile.city);
+
+            textUserAbout.setText(profile.profile.about);
+            textUserInterest.setText(profile.profile.interest);
+            textUserSkill.setText(profile.profile.skill);
+
+            profile.github = profile.profile.github;
+            profile.linkedin = profile.profile.linkedin;
+
+            imageDribble.setVisibility(View.GONE);
         }
 
         configureProfile();
@@ -178,7 +197,7 @@ public class ProfileActivity extends AppCompatActivity {
     private View.OnClickListener onChatClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ActivityUtils.startActivityUrl(ProfileActivity.this, "fb://messaging/10212289936858364");
+            ActivityUtils.startActivityUrl(ProfileActivity.this, "fb-messenger://user/10212289936858364");
         }
     };
 
