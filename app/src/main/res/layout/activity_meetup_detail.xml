@@ -30,6 +30,7 @@
                     android:src="#aaa" />
 
                 <id.co.binar.connectdev.components.textview.MontserratBold
+                    android:id="@+id/text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -38,6 +39,7 @@
                     android:textSize="16sp" />
 
                 <id.co.binar.connectdev.components.textview.MontserratRegular
+                    android:id="@+id/text_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Wednesday, 10 November 2017"
@@ -45,6 +47,7 @@
                     android:textSize="12sp" />
 
                 <id.co.binar.connectdev.components.textview.MontserratRegular
+                    android:id="@+id/text_time_range"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="11AM - 1PM"
@@ -60,9 +63,11 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/input_about"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="@drawable/rectangle_background"
+                    android:editable="false"
                     android:gravity="top|left"
                     android:hint="about meetup"
                     android:padding="16dp"
@@ -85,6 +90,7 @@
                         android:src="@drawable/ic_location" />
 
                     <id.co.binar.connectdev.components.textview.MontserratRegular
+                        android:id="@+id/text_place"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
