@@ -15,6 +15,7 @@ import java.util.List;
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.layoutmanager.NonScrollableLinearLayoutManager;
 import id.co.binar.connectdev.module.meetup.model.Meetup;
+import id.co.binar.connectdev.tools.ActivityUtils;
 
 /**
  * Created by rioswarawan on 11/10/17.
