@@ -1,6 +1,6 @@
 package id.co.binar.connectdev.module.profile.presenter;
 
-import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.network.model.FriendResponse;
 
 /**
  * Created by fatimazza on 11/9/17.
@@ -8,8 +8,12 @@ import id.co.binar.connectdev.network.model.Friend;
 
 public interface OnLoadProfileListener {
 
-    void profileFetched(Friend friend);
+    void profileFetched(FriendResponse friendResponse);
 
     void onError(String message);
+
+    void showDialog();
+
+    void hideDialog();
 
 }

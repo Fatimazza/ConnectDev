@@ -2,7 +2,7 @@ package id.co.binar.connectdev.module.find.presenter;
 
 import id.co.binar.connectdev.network.NetworkService;
 import id.co.binar.connectdev.network.RestApi;
-import id.co.binar.connectdev.network.model.SearchFriend;
+import id.co.binar.connectdev.network.model.SearchFriendResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,17 +20,21 @@ public class FindFriendPresenter {
     }
 
     public void getNearestFriend(final OnFindFriendListener listener) {
-        this.restApi.getNearestFriend().enqueue(new Callback<SearchFriend>() {
+
+        listener.showDialog();
+        this.restApi.getNearestFriend().enqueue(new Callback<SearchFriendResponse>() {
             @Override
-            public void onResponse(Call<SearchFriend> call, Response<SearchFriend> response) {
+            public void onResponse(Call<SearchFriendResponse> call, Response<SearchFriendResponse> response) {
                 if (response.body() != null) {
                     listener.friendFetched(response.body().friend);
+                    listener.hideDialog();
                 }
             }
 
             @Override
-            public void onFailure(Call<SearchFriend> call, Throwable t) {
+            public void onFailure(Call<SearchFriendResponse> call, Throwable t) {
                 listener.onError(t.getLocalizedMessage());
+                listener.hideDialog();
             }
         });
     }

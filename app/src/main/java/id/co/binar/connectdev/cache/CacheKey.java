@@ -5,4 +5,6 @@ package id.co.binar.connectdev.cache;
  */
 
 public class CacheKey {
+
+    public static final String facebookUserId = "facebook-user-id";
 }

@@ -13,7 +13,13 @@ import android.widget.Toast;
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.bottombar.BottomBar;
 import id.co.binar.connectdev.components.bottombar.BottomBarListener;
+import id.co.binar.connectdev.components.toolbar.Toolbar;
+import id.co.binar.connectdev.components.toolbar.ToolbarListener;
 import id.co.binar.connectdev.module.find.view.FindFragment;
+import id.co.binar.connectdev.module.meetup.view.MeetupFragment;
+import id.co.binar.connectdev.module.profile.model.Profile;
+import id.co.binar.connectdev.module.profile.view.ProfileActivity;
+import id.co.binar.connectdev.tools.ActivityUtils;
 import id.co.binar.connectdev.tools.FragmentUtils;
 
 /**
@@ -22,14 +28,15 @@ import id.co.binar.connectdev.tools.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     private BottomBar bottomBar;
     private FrameLayout container;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
 
@@ -37,7 +44,25 @@ public class MainActivity extends AppCompatActivity {
         bottomBar = (BottomBar) findViewById(R.id.bottom_bar);
         bottomBar.setListener(bottomBarListener);
         bottomBar.selectBar(0);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setListener(toolbarListener);
     }
+
+    private ToolbarListener toolbarListener = new ToolbarListener() {
+        @Override
+        public void onNotificationClicked() {
+        }
+
+        @Override
+        public void onProfileClicked() {
+            Profile profile = new Profile();
+            profile.self = true;
+
+            ActivityUtils.startActivityWParam(MainActivity.this, ProfileActivity.class, ProfileActivity.paramKey, profile);
+        }
+    };
+
 
     @Override
     public void onBackPressed() {
@@ -55,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onMeetupSelected() {
-            Toast.makeText(MainActivity.this, "B", Toast.LENGTH_SHORT).show();
+            FragmentUtils.startFragment(MainActivity.this, new MeetupFragment(), R.id.container);
         }
 
         @Override

@@ -6,7 +6,7 @@ import java.util.List;
  * Created by rioswarawan on 11/9/17.
  */
 
-public class SearchFriend {
+public class SearchFriendResponse {
 
-    public List<Friend> friend;
+    public List<FriendResponse> friend;
 }

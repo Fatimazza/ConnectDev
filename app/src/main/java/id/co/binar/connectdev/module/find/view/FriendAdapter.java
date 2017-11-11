@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import id.co.binar.connectdev.R;
-import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.network.model.FriendResponse;
 
 /**
  * Created by rioswarawan on 11/9/17.
@@ -23,13 +23,13 @@ import id.co.binar.connectdev.network.model.Friend;
 public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<Friend> friends;
+    private List<FriendResponse> friendResponses;
     private LayoutInflater inflater;
     private OnFriendItemClickListener onFriendItemClickListener;
 
-    public FriendAdapter(Context context, List<Friend> friends, OnFriendItemClickListener onFriendItemClickListener) {
+    public FriendAdapter(Context context, List<FriendResponse> friendResponses, OnFriendItemClickListener onFriendItemClickListener) {
         this.context = context;
-        this.friends = friends;
+        this.friendResponses = friendResponses;
         this.inflater = LayoutInflater.from(context);
         this.onFriendItemClickListener = onFriendItemClickListener;
     }
@@ -43,12 +43,12 @@ public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         FriendViewHolder viewHolder = (FriendViewHolder) holder;
-        Friend friend = friends.get(position);
+        FriendResponse friendResponse = friendResponses.get(position);
 
         // add data to view
-        viewHolder.name.setText(friend.name);
-        viewHolder.skill.setText(friend.skill);
-        viewHolder.distance.setText(friend.distance + " m");
+        viewHolder.name.setText(friendResponse.name);
+        viewHolder.skill.setText(friendResponse.skill);
+        viewHolder.distance.setText(friendResponse.distance + " m");
         viewHolder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +57,13 @@ public class FriendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
 
         Glide.with(context)
-                .load("https://randomuser.me/api/portraits/med/women/71.jpg")
+                .load(friendResponse.photo)
                 .into(viewHolder.image);
     }
 
     @Override
     public int getItemCount() {
-        return friends.size();
+        return friendResponses.size();
     }
 
     class FriendViewHolder extends RecyclerView.ViewHolder {

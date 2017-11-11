@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <id.co.binar.connectdev.components.textview.MontserratRegular
+                android:id="@+id/text_time_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11AM - 1PM"
+                android:textColor="@color/textDark"
+                android:textSize="12sp" />
+
+            <id.co.binar.connectdev.components.textview.MontserratRegular
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="10 NOV 2017"
+                android:textColor="@color/textDark"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/separator" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <id.co.binar.connectdev.components.textview.MontserratSemiBold
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Product Design Meetup"
+                android:textColor="@color/textDark"
+                android:textSize="13sp" />
+
+            <id.co.binar.connectdev.components.textview.MontserratRegular
+                android:id="@+id/text_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_title"
+                android:layout_marginTop="4dp"
+                android:text="Jogja Digital Valley"
+                android:textColor="@color/textDark"
+                android:textSize="11sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_place"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <id.co.binar.connectdev.components.imageview.CircleImageView
+                        android:id="@+id/image_user_3"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:src="#000" />
+
+                    <id.co.binar.connectdev.components.imageview.CircleImageView
+                        android:id="@+id/image_user_2"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="16dp"
+                        android:src="#f11" />
+
+                    <id.co.binar.connectdev.components.imageview.CircleImageView
+                        android:id="@+id/image_user_1"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="#11f" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="8dp">
+
+                    <id.co.binar.connectdev.components.imageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@color/violet_0" />
+
+                    <id.co.binar.connectdev.components.textview.MontserratSemiBold
+                        android:id="@+id/text_more_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="+1"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp" />
+                </FrameLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

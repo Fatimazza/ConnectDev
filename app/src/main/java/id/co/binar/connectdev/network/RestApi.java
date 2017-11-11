@@ -1,7 +1,9 @@
 package id.co.binar.connectdev.network;
 
-import id.co.binar.connectdev.network.model.Friend;
-import id.co.binar.connectdev.network.model.SearchFriend;
+import id.co.binar.connectdev.module.meetup.model.Meetup;
+import id.co.binar.connectdev.module.profile.model.Profile;
+import id.co.binar.connectdev.network.model.MeetupResponse;
+import id.co.binar.connectdev.network.model.SearchFriendResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -13,9 +15,12 @@ import retrofit2.http.POST;
 public interface RestApi {
 
     @POST("/search")
-    Call<SearchFriend> getNearestFriend();
+    Call<SearchFriendResponse> getNearestFriend();
 
     @GET("/profile")
-    Call<Friend> getProfile();
+    Call<Profile> getProfile();
+
+    @GET("/meetup")
+    Call<MeetupResponse> getMeetup();
 
 }
