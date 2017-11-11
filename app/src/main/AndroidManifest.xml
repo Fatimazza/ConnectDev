@@ -24,9 +24,8 @@
 
         <activity android:name=".module.login.view.LoginActivity" />
         <activity android:name=".module.main.view.MainActivity" />
-        <activity android:name=".module.profile.view.ProfileActivity">
-
-        </activity>
+        <activity android:name=".module.profile.view.ProfileActivity" />
+        <activity android:name=".module.meetupcreate.view.CreateMeetupActivity" />
 
         <!-- Start: Facebook Configuration  -->
 
