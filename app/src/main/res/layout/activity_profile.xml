@@ -50,6 +50,16 @@
                     android:text="Chat"
                     android:textColor="@android:color/white"
                     android:textSize="14sp" />
+
+                <id.co.binar.connectdev.components.button.MontserratRegular
+                    android:id="@+id/button_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_logout"
+                    android:text="Logout"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

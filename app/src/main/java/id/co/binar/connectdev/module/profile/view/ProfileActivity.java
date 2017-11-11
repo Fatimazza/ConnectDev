@@ -10,12 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.cache.CacheKey;
 import id.co.binar.connectdev.cache.GlobalCache;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbar;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbarListener;
+import id.co.binar.connectdev.module.login.view.LoginActivity;
 import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.module.profile.presenter.OnLoadProfileListener;
 import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
@@ -34,8 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView textPhone, textEmail, textCity;
     private TextView textUserAbout, textUserInterest, textUserSkill;
     private ImageView imageProfile, imageDribble, imageLinkedin, imageGithub;
-    private Button buttonAddFriend;
-    private Button buttonChat;
+    private Button buttonAddFriend, buttonChat, buttonLogout;
 
     private Profile profile;
     private ProfilePresenter presenter;
@@ -66,11 +67,13 @@ public class ProfileActivity extends AppCompatActivity {
         imageGithub = (ImageView) findViewById(R.id.image_github);
         buttonAddFriend = (Button) findViewById(R.id.button_add_friend);
         buttonChat = (Button) findViewById(R.id.button_chat);
+        buttonLogout = (Button) findViewById(R.id.button_logout);
 
         imageLinkedin.setOnClickListener(onLinkedinClicked);
         imageGithub.setOnClickListener(onGithubClicked);
         buttonAddFriend.setOnClickListener(onAddFriendClicked);
         buttonChat.setOnClickListener(onChatClicked);
+        buttonLogout.setOnClickListener(onLogoutClicked);
 
         toolbar.setListener(simpleToolbarListener);
         toolbar.setName("Profile");
@@ -99,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             toolbar.edit(false);
             buttonAddFriend.setVisibility(profile.friend ? View.GONE : View.VISIBLE);
+            buttonLogout.setVisibility(View.GONE);
         }
     }
 
@@ -143,6 +147,14 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onError(String message) {
 
+        }
+    };
+
+    private View.OnClickListener onLogoutClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            LoginManager.getInstance().logOut();
+            ActivityUtils.returnClearTop(ProfileActivity.this, LoginActivity.class);
         }
     };
 
