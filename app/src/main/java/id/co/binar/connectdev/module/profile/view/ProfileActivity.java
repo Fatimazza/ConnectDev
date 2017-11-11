@@ -1,12 +1,14 @@
 package id.co.binar.connectdev.module.profile.view;
 
 
+import android.app.ProgressDialog;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +26,7 @@ import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
 import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestDialog;
 import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestListener;
 import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestSentDialog;
-import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.network.model.FriendResponse;
 import id.co.binar.connectdev.tools.ActivityUtils;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -42,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ProfilePresenter presenter;
     private FriendRequestDialog friendRequestDialog;
     private FriendRequestSentDialog friendRequestSentDialog;
+
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +84,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         friendRequestDialog = new FriendRequestDialog(this, friendRequestListener);
         friendRequestSentDialog = new FriendRequestSentDialog(this);
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Brewing the coffee...");
 
         presenter = new ProfilePresenter();
 
@@ -120,26 +127,26 @@ public class ProfileActivity extends AppCompatActivity {
 
     private OnLoadProfileListener onLoadProfileListener = new OnLoadProfileListener() {
         @Override
-        public void profileFetched(Friend friend) {
+        public void profileFetched(FriendResponse friendResponse) {
             String userId = GlobalCache.read(CacheKey.facebookUserId, String.class);
             String facebookPhoto = "https://graph.facebook.com/" + userId + "/picture?type=large";
             Glide.with(ProfileActivity.this)
                     .load(facebookPhoto)
                     .into(imageProfile);
 
-            textName.setText(friend.name);
-            textSkill.setText(friend.skill);
-            textTotalFriend.setText(friend.friends + " Friend(s)");
-            textEmail.setText(friend.email);
-            textPhone.setText(friend.phone);
-            textCity.setText(friend.city);
+            textName.setText(friendResponse.name);
+            textSkill.setText(friendResponse.skill);
+            textTotalFriend.setText(friendResponse.friends + " Friend(s)");
+            textEmail.setText(friendResponse.email);
+            textPhone.setText(friendResponse.phone);
+            textCity.setText(friendResponse.city);
 
-            textUserAbout.setText(friend.about);
-            textUserInterest.setText(friend.interest);
-            textUserSkill.setText(friend.skill);
+            textUserAbout.setText(friendResponse.about);
+            textUserInterest.setText(friendResponse.interest);
+            textUserSkill.setText(friendResponse.skill);
 
-            profile.github = friend.github;
-            profile.linkedin = friend.linkedin;
+            profile.github = friendResponse.github;
+            profile.linkedin = friendResponse.linkedin;
 
             imageDribble.setVisibility(View.GONE);
         }
@@ -147,6 +154,16 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onError(String message) {
 
+        }
+
+        @Override
+        public void showDialog() {
+            dialog.show();
+        }
+
+        @Override
+        public void hideDialog() {
+            dialog.dismiss();
         }
     };
 
@@ -161,7 +178,7 @@ public class ProfileActivity extends AppCompatActivity {
     private View.OnClickListener onChatClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ActivityUtils.startActivityUrl(ProfileActivity.this, "fb://messaging/24353623");
+            ActivityUtils.startActivityUrl(ProfileActivity.this, "fb://messaging/10212289936858364");
         }
     };
 

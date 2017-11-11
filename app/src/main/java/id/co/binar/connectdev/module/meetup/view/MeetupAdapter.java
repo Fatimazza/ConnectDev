@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,9 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import id.co.binar.connectdev.R;
-import id.co.binar.connectdev.module.find.view.OnFriendItemClickListener;
 import id.co.binar.connectdev.module.meetup.model.Meetup;
-import id.co.binar.connectdev.network.model.Friend;
 
 /**
  * Created by rioswarawan on 11/9/17.
@@ -29,6 +26,8 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private List<Meetup> meetups;
     private LayoutInflater inflater;
     private OnMeetupItemListener onMeetupItemListener;
+
+    private int totalUser = 5;
 
     public MeetupAdapter(Context context, List<Meetup> meetups, OnMeetupItemListener onMeetupItemListener) {
         this.context = context;
@@ -49,13 +48,12 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Meetup meetup = meetups.get(position);
 
         // add data to view
-        viewHolder.title.setText(meetup.title);
+        viewHolder.title.setText(meetup.name);
         viewHolder.place.setText(meetup.place);
         viewHolder.date.setText(meetup.date);
-        viewHolder.timeRange.setText(meetup.timeRange);
+        viewHolder.timeRange.setText(meetup.waktu);
 
-        for (int i = 0; i < meetup.users.size(); i++) {
-            Friend friend = meetup.users.get(i);
+        for (int i = 0; i < totalUser; i++) {
             if (i == 0) {
                 Glide.with(context)
                         .load("https://randomuser.me/api/portraits/med/women/71.jpg")
@@ -71,11 +69,11 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         }
 
-        if (meetup.users.size() - 3 != 0) {
-            String count = String.valueOf(meetup.users.size() - 3);
+        if (totalUser - 3 != 0) {
+            String count = String.valueOf(totalUser - 3);
             viewHolder.more.setText("+" + count);
         }
-        
+
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,8 +100,8 @@ public class MeetupAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             imageUser1 = (ImageView) itemView.findViewById(R.id.image_user_1);
             imageUser2 = (ImageView) itemView.findViewById(R.id.image_user_2);
             imageUser3 = (ImageView) itemView.findViewById(R.id.image_user_3);
-            title = (TextView) itemView.findViewById(R.id.text_name);
-            place = (TextView) itemView.findViewById(R.id.text_skill);
+            title = (TextView) itemView.findViewById(R.id.text_title);
+            place = (TextView) itemView.findViewById(R.id.text_place);
             date = (TextView) itemView.findViewById(R.id.text_date);
             timeRange = (TextView) itemView.findViewById(R.id.text_time_range);
             more = (TextView) itemView.findViewById(R.id.text_more_people);

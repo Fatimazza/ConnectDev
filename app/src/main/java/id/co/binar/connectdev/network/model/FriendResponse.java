@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by rioswarawan on 11/9/17.
  */
 
-public class Friend {
+public class FriendResponse {
 
     public String name;
     public String email;

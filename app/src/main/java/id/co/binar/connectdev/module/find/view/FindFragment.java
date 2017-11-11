@@ -1,11 +1,10 @@
 package id.co.binar.connectdev.module.find.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,15 +20,12 @@ import java.util.List;
 
 import id.co.binar.connectdev.R;
 import id.co.binar.connectdev.components.layoutmanager.NonScrollableLinearLayoutManager;
-import id.co.binar.connectdev.components.toolbar.Toolbar;
-import id.co.binar.connectdev.components.toolbar.ToolbarListener;
 import id.co.binar.connectdev.module.find.presenter.FindFriendPresenter;
 import id.co.binar.connectdev.module.find.presenter.OnFindFriendListener;
 import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.module.profile.view.ProfileActivity;
-import id.co.binar.connectdev.network.model.Friend;
+import id.co.binar.connectdev.network.model.FriendResponse;
 import id.co.binar.connectdev.tools.ActivityUtils;
-import id.co.binar.connectdev.tools.FragmentUtils;
 
 /**
  * Created by rioswarawan on 11/9/17.
@@ -43,8 +39,10 @@ public class FindFragment extends Fragment {
     private RecyclerView recyclerUser;
 
     private FindFriendPresenter presenter;
-    private List<Friend> friends;
+    private List<FriendResponse> friendResponses;
     private FriendAdapter adapter;
+
+    private ProgressDialog dialog;
 
     @Nullable
     @Override
@@ -63,11 +61,14 @@ public class FindFragment extends Fragment {
         textAdvancedSearch = (TextView) contentView.findViewById(R.id.text_advanced_search);
         textAdvancedSearch.setOnClickListener(onAdvanceSearchClicked);
 
-        friends = new ArrayList<>();
-        adapter = new FriendAdapter(getActivity(), friends, onFriendItemClickListener);
+        friendResponses = new ArrayList<>();
+        adapter = new FriendAdapter(getActivity(), friendResponses, onFriendItemClickListener);
         recyclerUser = (RecyclerView) contentView.findViewById(R.id.recycler_user);
         recyclerUser.setAdapter(adapter);
         recyclerUser.setLayoutManager(new NonScrollableLinearLayoutManager(getActivity()));
+
+        dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("Brewing the coffee...");
 
         presenter = new FindFriendPresenter();
         presenter.getNearestFriend(onFindFriendListener);
@@ -91,14 +92,26 @@ public class FindFragment extends Fragment {
 
     private OnFindFriendListener onFindFriendListener = new OnFindFriendListener() {
         @Override
-        public void friendFetched(List<Friend> friends) {
-            FindFragment.this.friends.addAll(friends);
-            FindFragment.this.adapter.notifyDataSetChanged();
+        public void friendFetched(List<FriendResponse> friendResponses) {
+            if (friendResponses != null) {
+                FindFragment.this.friendResponses.addAll(friendResponses);
+                FindFragment.this.adapter.notifyDataSetChanged();
+            }
         }
 
         @Override
         public void onError(String message) {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void showDialog() {
+            dialog.show();
+        }
+
+        @Override
+        public void hideDialog() {
+            dialog.dismiss();
         }
     };
 
