@@ -19,7 +19,7 @@ import id.co.binar.connectdev.module.meetup.model.Meetup;
 /**
  * Created by rioswarawan on 11/10/17.
  */
-git
+
 public class MeetupFragment extends Fragment {
 
     private EditText inputSearch;

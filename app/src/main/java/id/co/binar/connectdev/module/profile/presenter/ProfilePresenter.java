@@ -1,5 +1,6 @@
 package id.co.binar.connectdev.module.profile.presenter;
 
+import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.network.NetworkService;
 import id.co.binar.connectdev.network.RestApi;
 import id.co.binar.connectdev.network.model.Friend;
@@ -20,16 +21,17 @@ public class ProfilePresenter {
     }
 
     public void getProfile(final OnLoadProfileListener listener) {
-        this.restApi.getProfile().enqueue(new Callback<Friend>() {
+        this.restApi.getProfile().enqueue(new Callback<Profile>() {
             @Override
-            public void onResponse(Call<Friend> call, Response<Friend> response) {
+            public void onResponse(Call<Profile> call, Response<Profile> response) {
                 if (response.body() != null) {
-                    listener.profileFetched(response.body());
+                    Friend friend = response.body().profile;
+                    listener.profileFetched(friend);
                 }
             }
 
             @Override
-            public void onFailure(Call<Friend> call, Throwable t) {
+            public void onFailure(Call<Profile> call, Throwable t) {
                 listener.onError(t.getLocalizedMessage());
             }
         });

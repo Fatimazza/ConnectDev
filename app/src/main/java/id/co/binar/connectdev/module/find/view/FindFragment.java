@@ -1,5 +1,6 @@
 package id.co.binar.connectdev.module.find.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +37,6 @@ import id.co.binar.connectdev.tools.FragmentUtils;
 
 public class FindFragment extends Fragment {
 
-    private Toolbar toolbar;
     private EditText inputSearch;
     private TextView textAdvancedSearch;
     private ImageView imageSearch;
@@ -51,16 +52,16 @@ public class FindFragment extends Fragment {
         View contentView = inflater.inflate(R.layout.fragment_find, container, false);
 
         inputSearch = (EditText) contentView.findViewById(R.id.input_search);
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(inputSearch.getWindowToken(), 0);
+        }
 
         imageSearch = (ImageView) contentView.findViewById(R.id.image_search);
         imageSearch.setOnClickListener(onSearchClicked);
 
         textAdvancedSearch = (TextView) contentView.findViewById(R.id.text_advanced_search);
         textAdvancedSearch.setOnClickListener(onAdvanceSearchClicked);
-
-        toolbar = (Toolbar) contentView.findViewById(R.id.toolbar);
-        toolbar.setListener(toolbarListener);
-        toolbar.setProfileImage("https://randomuser.me/api/portraits/med/women/71.jpg");
 
         friends = new ArrayList<>();
         adapter = new FriendAdapter(getActivity(), friends, onFriendItemClickListener);
@@ -73,20 +74,6 @@ public class FindFragment extends Fragment {
 
         return contentView;
     }
-
-    private ToolbarListener toolbarListener = new ToolbarListener() {
-        @Override
-        public void onNotificationClicked() {
-        }
-
-        @Override
-        public void onProfileClicked() {
-            Profile profile = new Profile();
-            profile.self = true;
-
-            ActivityUtils.startActivityWParam(getActivity(), ProfileActivity.class, ProfileActivity.paramKey, profile);
-        }
-    };
 
     private View.OnClickListener onAdvanceSearchClicked = new View.OnClickListener() {
         @Override

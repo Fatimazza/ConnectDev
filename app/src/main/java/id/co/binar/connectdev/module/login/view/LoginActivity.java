@@ -19,6 +19,9 @@ import com.facebook.login.LoginResult;
 import java.util.Arrays;
 
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.cache.CacheKey;
+import id.co.binar.connectdev.cache.CacheManager;
+import id.co.binar.connectdev.cache.GlobalCache;
 import id.co.binar.connectdev.module.main.view.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     private FacebookCallback<LoginResult> facebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
+            String userId = loginResult.getAccessToken().getUserId();
+            GlobalCache.write(CacheKey.facebookUserId, userId, String.class);
             routeToMain();
         }
 

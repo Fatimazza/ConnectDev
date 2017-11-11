@@ -1,5 +1,6 @@
 package id.co.binar.connectdev.network;
 
+import id.co.binar.connectdev.module.profile.model.Profile;
 import id.co.binar.connectdev.network.model.Friend;
 import id.co.binar.connectdev.network.model.SearchFriend;
 import retrofit2.Call;
@@ -16,6 +17,6 @@ public interface RestApi {
     Call<SearchFriend> getNearestFriend();
 
     @GET("/profile")
-    Call<Friend> getProfile();
+    Call<Profile> getProfile();
 
 }

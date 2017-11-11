@@ -21,7 +21,7 @@ public class SimpleToolbar extends LinearLayout {
 
     private View rootView;
     private ImageView imageBack, imageEdit;
-    private TextView textName;
+    private TextView textToolbaeName;
 
     private SimpleToolbarListener listener;
 
@@ -39,7 +39,7 @@ public class SimpleToolbar extends LinearLayout {
         this.rootView = LayoutInflater.from(context).inflate(R.layout.view_toolbar_simple, this, true);
         this.imageBack = (ImageView) rootView.findViewById(R.id.button_back);
         this.imageEdit = (ImageView) rootView.findViewById(R.id.button_edit);
-        this.textName = (TextView) rootView.findViewById(R.id.text_name);
+        this.textToolbaeName = (TextView) rootView.findViewById(R.id.text_toolbar_name);
     }
 
     public void setListener(SimpleToolbarListener listener) {
@@ -53,7 +53,7 @@ public class SimpleToolbar extends LinearLayout {
     }
 
     public void setName(String name) {
-        this.textName.setText(name);
+        this.textToolbaeName.setText(name);
     }
 
     private OnClickListener onBackClicked = new OnClickListener() {

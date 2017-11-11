@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.cache.CacheKey;
+import id.co.binar.connectdev.cache.GlobalCache;
 
 /**
  * Created by rioswarawan on 11/9/17.
@@ -37,18 +39,18 @@ public class Toolbar extends LinearLayout {
         this.rootView = LayoutInflater.from(context).inflate(R.layout.view_toolbar, this, true);
         this.imageNotification = (ImageView) rootView.findViewById(R.id.image_notification);
         this.imageProfile = (ImageView) rootView.findViewById(R.id.image_profile);
+
+        String userId = GlobalCache.read(CacheKey.facebookUserId, String.class);
+        String facebookPhoto = "https://graph.facebook.com/" + userId + "/picture?type=large";
+        Glide.with(getContext())
+                .load(facebookPhoto)
+                .into(imageProfile);
     }
 
     public void setListener(ToolbarListener listener) {
         this.listener = listener;
         this.imageNotification.setOnClickListener(onNotificationClicked);
         this.imageProfile.setOnClickListener(onProfileClicked);
-    }
-
-    public void setProfileImage(String image) {
-        Glide.with(getContext())
-                .load(image)
-                .into(imageProfile);
     }
 
     private OnClickListener onNotificationClicked = new OnClickListener() {

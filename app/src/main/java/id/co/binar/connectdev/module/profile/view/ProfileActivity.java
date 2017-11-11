@@ -9,13 +9,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import id.co.binar.connectdev.R;
+import id.co.binar.connectdev.cache.CacheKey;
+import id.co.binar.connectdev.cache.GlobalCache;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbar;
 import id.co.binar.connectdev.components.toolbar.SimpleToolbarListener;
 import id.co.binar.connectdev.module.profile.model.Profile;
+import id.co.binar.connectdev.module.profile.presenter.OnLoadProfileListener;
+import id.co.binar.connectdev.module.profile.presenter.ProfilePresenter;
 import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestDialog;
 import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestListener;
 import id.co.binar.connectdev.module.profile.view.dialog.FriendRequestSentDialog;
+import id.co.binar.connectdev.network.model.Friend;
 import id.co.binar.connectdev.tools.ActivityUtils;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -31,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button buttonChat;
 
     private Profile profile;
+    private ProfilePresenter presenter;
     private FriendRequestDialog friendRequestDialog;
     private FriendRequestSentDialog friendRequestSentDialog;
 
@@ -59,6 +67,8 @@ public class ProfileActivity extends AppCompatActivity {
         buttonAddFriend = (Button) findViewById(R.id.button_add_friend);
         buttonChat = (Button) findViewById(R.id.button_chat);
 
+        imageLinkedin.setOnClickListener(onLinkedinClicked);
+        imageGithub.setOnClickListener(onGithubClicked);
         buttonAddFriend.setOnClickListener(onAddFriendClicked);
         buttonChat.setOnClickListener(onChatClicked);
 
@@ -67,6 +77,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         friendRequestDialog = new FriendRequestDialog(this, friendRequestListener);
         friendRequestSentDialog = new FriendRequestSentDialog(this);
+
+        presenter = new ProfilePresenter();
+        presenter.getProfile(onLoadProfileListener);
 
         configureProfile();
     }
@@ -77,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
             toolbar.edit(true);
             buttonAddFriend.setVisibility(View.GONE);
             buttonChat.setVisibility(View.GONE);
+            textDistance.setVisibility(View.GONE);
         } else {
             toolbar.edit(false);
             buttonAddFriend.setVisibility(profile.friend ? View.GONE : View.VISIBLE);
@@ -95,6 +109,38 @@ public class ProfileActivity extends AppCompatActivity {
         }
     };
 
+    private OnLoadProfileListener onLoadProfileListener = new OnLoadProfileListener() {
+        @Override
+        public void profileFetched(Friend friend) {
+            String userId = GlobalCache.read(CacheKey.facebookUserId, String.class);
+            String facebookPhoto = "https://graph.facebook.com/" + userId + "/picture?type=large";
+            Glide.with(ProfileActivity.this)
+                    .load(facebookPhoto)
+                    .into(imageProfile);
+
+            textName.setText(friend.name);
+            textSkill.setText(friend.skill);
+            textTotalFriend.setText(friend.friends + " Friend(s)");
+            textEmail.setText(friend.email);
+            textPhone.setText(friend.phone);
+            textCity.setText(friend.city);
+
+            textUserAbout.setText(friend.about);
+            textUserInterest.setText(friend.interest);
+            textUserSkill.setText(friend.skill);
+
+            profile.github = friend.github;
+            profile.linkedin = friend.linkedin;
+
+            imageDribble.setVisibility(View.GONE);
+        }
+
+        @Override
+        public void onError(String message) {
+
+        }
+    };
+
     private View.OnClickListener onChatClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -106,6 +152,20 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             friendRequestDialog.getDialog().show();
+        }
+    };
+
+    private View.OnClickListener onGithubClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ActivityUtils.startActivityUrl(ProfileActivity.this, profile.github);
+        }
+    };
+
+    private View.OnClickListener onLinkedinClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            ActivityUtils.startActivityUrl(ProfileActivity.this, profile.linkedin);
         }
     };
 
