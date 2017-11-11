@@ -79,7 +79,12 @@ public class ProfileActivity extends AppCompatActivity {
         friendRequestSentDialog = new FriendRequestSentDialog(this);
 
         presenter = new ProfilePresenter();
-        presenter.getProfile(onLoadProfileListener);
+
+        if (profile.self) {
+            presenter.getProfile(onLoadProfileListener);
+        } else {
+            presenter.getProfile(onLoadProfileListener);
+        }
 
         configureProfile();
     }
